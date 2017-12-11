@@ -1,0 +1,17 @@
+        Enemy"elephan67t"{
+    attackspeed:0.7,
+    movementspeed:random,
+    maxhealt:random,
+    attackdamage:2,
+    }
+Enemy"elephan67t"{
+    attackspeed:0.7,
+    mo,
+}
+
+Enemy"elephan67t"{
+    attackspeed:0.7,
+    movementspeed:random,
+    maxhealt:random,
+    attackdamage:2,
+}

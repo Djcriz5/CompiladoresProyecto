@@ -1,0 +1,200 @@
+State 11 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: definicion "eof"
+
+    1 definicion: TKN_Enemy TKN_Identificador cuerpo
+
+    2 cuerpo: "{" expresion "}"
+
+    3 expresion: expresion listaExpresion
+
+    4 listaExpresion: expresion
+
+    5 expresion: TKN_palabraReservada ":" valor ","
+
+    6 valor: TKN_Random
+    7      | TKN_Integer
+    8      | TKN_Decimal
+
+
+Terminals, with rules where they appear
+
+"eof" (0) 0
+error (256)
+"{" (258) 2
+"}" (259) 2
+":" (260) 5
+"," (261) 5
+TKN_Random (262) 6
+TKN_Enemy (263) 1
+TKN_Identificador (264) 1
+TKN_palabraReservada (265) 5
+TKN_Integer (266) 7
+TKN_Decimal (267) 8
+
+
+Nonterminals, with rules where they appear
+
+$accept (13)
+    on left: 0
+definicion (14)
+    on left: 1, on right: 0
+cuerpo (15)
+    on left: 2, on right: 1
+expresion (16)
+    on left: 3 5, on right: 2 3 4
+listaExpresion (17)
+    on left: 4, on right: 3
+valor (18)
+    on left: 6 7 8, on right: 5
+
+
+State 0
+
+    0 $accept: . definicion "eof"
+
+    TKN_Enemy  shift, and go to state 1
+
+    definicion  go to state 2
+
+
+State 1
+
+    1 definicion: TKN_Enemy . TKN_Identificador cuerpo
+
+    TKN_Identificador  shift, and go to state 3
+
+
+State 2
+
+    0 $accept: definicion . "eof"
+
+    "eof"  shift, and go to state 4
+
+
+State 3
+
+    1 definicion: TKN_Enemy TKN_Identificador . cuerpo
+
+    "{"  shift, and go to state 5
+
+    cuerpo  go to state 6
+
+
+State 4
+
+    0 $accept: definicion "eof" .
+
+    $default  accept
+
+
+State 5
+
+    2 cuerpo: "{" . expresion "}"
+
+    TKN_palabraReservada  shift, and go to state 7
+
+    expresion  go to state 8
+
+
+State 6
+
+    1 definicion: TKN_Enemy TKN_Identificador cuerpo .
+
+    $default  reduce using rule 1 (definicion)
+
+
+State 7
+
+    5 expresion: TKN_palabraReservada . ":" valor ","
+
+    ":"  shift, and go to state 9
+
+
+State 8
+
+    2 cuerpo: "{" expresion . "}"
+    3 expresion: expresion . listaExpresion
+
+    "}"                   shift, and go to state 10
+    TKN_palabraReservada  shift, and go to state 7
+
+    expresion       go to state 11
+    listaExpresion  go to state 12
+
+
+State 9
+
+    5 expresion: TKN_palabraReservada ":" . valor ","
+
+    TKN_Random   shift, and go to state 13
+    TKN_Integer  shift, and go to state 14
+    TKN_Decimal  shift, and go to state 15
+
+    valor  go to state 16
+
+
+State 10
+
+    2 cuerpo: "{" expresion "}" .
+
+    $default  reduce using rule 2 (cuerpo)
+
+
+State 11
+
+    3 expresion: expresion . listaExpresion
+    4 listaExpresion: expresion .
+
+    TKN_palabraReservada  shift, and go to state 7
+
+    TKN_palabraReservada  [reduce using rule 4 (listaExpresion)]
+    $default              reduce using rule 4 (listaExpresion)
+
+    expresion       go to state 11
+    listaExpresion  go to state 12
+
+
+State 12
+
+    3 expresion: expresion listaExpresion .
+
+    $default  reduce using rule 3 (expresion)
+
+
+State 13
+
+    6 valor: TKN_Random .
+
+    $default  reduce using rule 6 (valor)
+
+
+State 14
+
+    7 valor: TKN_Integer .
+
+    $default  reduce using rule 7 (valor)
+
+
+State 15
+
+    8 valor: TKN_Decimal .
+
+    $default  reduce using rule 8 (valor)
+
+
+State 16
+
+    5 expresion: TKN_palabraReservada ":" valor . ","
+
+    ","  shift, and go to state 17
+
+
+State 17
+
+    5 expresion: TKN_palabraReservada ":" valor "," .
+
+    $default  reduce using rule 5 (expresion)
